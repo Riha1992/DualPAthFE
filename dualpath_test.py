@@ -9,7 +9,7 @@ import evaluate
 
 model_id="XLSR_dualpathfe_temp_1"
 
-# /data/p312702/wav2vec2_frisian_common_voice_14
+# /data/wav2vec2_frisian_common_voice_14
 #__________________________________________________________________________________________________________
 #seed=668912
 #from transformers import set_seed
@@ -23,9 +23,9 @@ from datasets import load_dataset # load_metric
 #common_voice = common_voice.remove_columns(['client_id', 'up_votes','down_votes', 'age', 'gender','accent','locale','segment'])
 
 
-#base_url_test="/data/p312702/common_voice_17_germanic/test_iranian/"
-#base_url_test="/data/p312702/common_voice_17_germanic/test_romance"
-base_url_test="/data/p312702/common_voice_17_germanic/test_fy_fr"
+#base_url_test="/data/common_voice_17_germanic/test_iranian/"
+#base_url_test="/data/common_voice_17_germanic/test_romance"
+base_url_test="/data/common_voice_17_germanic/test_fy_fr"
 
 
 cv_germanic_test=load_dataset("audiofolder",data_dir=base_url_test,trust_remote_code=True)
@@ -184,10 +184,10 @@ cv_frisian_test=cv_frisian_test.map(remove_special_characters)
 
 from transformers import Wav2Vec2CTCTokenizer
 
-#tokenizer = Wav2Vec2CTCTokenizer.from_pretrained("/data/p312702/from_wietse/"+model_id, unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
-#tokenizer = Wav2Vec2CTCTokenizer('/data/p312702/from_wietse/wav2vec2_fy_common_voice_94/vocab.json', unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
-tokenizer = Wav2Vec2CTCTokenizer.from_pretrained('/data/p312702/from_wietse/'+model_id, unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
-#tokenizer = Wav2Vec2CTCTokenizer.from_pretrained('/data/p312702/from_wietse/'+model_id, unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
+#tokenizer = Wav2Vec2CTCTokenizer.from_pretrained("/data/"+model_id, unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
+#tokenizer = Wav2Vec2CTCTokenizer('/data/vocab.json', unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
+tokenizer = Wav2Vec2CTCTokenizer.from_pretrained('/data/'+model_id, unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
+#tokenizer = Wav2Vec2CTCTokenizer.from_pretrained('/data/'+model_id, unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|")
 
 
 from transformers import Wav2Vec2Processor, Wav2Vec2FeatureExtractor
@@ -254,8 +254,8 @@ from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor
 
 
 #processor = Wav2Vec2Processor(feature_extractor=feature_extractor, tokenizer=tokenizer)
-#processor = Wav2Vec2Processor.from_pretrained("/data/p312702/from_wietse/"+model_id) 
-#model = Wav2Vec2ForCTC.from_pretrained("/data/p312702/from_wietse/"+model_id).cuda() #"/checkpoint-"+target_checkpoint).cuda() # "Reihaneh/wav2vec2_frisian_common_voice_"+model_number).cuda()
+#processor = Wav2Vec2Processor.from_pretrained("/data/"+model_id) 
+#model = Wav2Vec2ForCTC.from_pretrained("/data/"+model_id).cuda() #"/checkpoint-"+target_checkpoint).cuda() # "Reihaneh/wav2vec2_frisian_common_voice_"+model_number).cuda()
 
 #from transformers import AutoFeatureExtractor
 
@@ -272,18 +272,18 @@ feature_extractor = Wav2Vec2FeatureExtractor.from_pretrained("/data/p312702/from
 processor = Wav2Vec2Processor(feature_extractor=feature_extractor, tokenizer=tokenizer)
 #from transformers import Wav2Vec2Processor
 
-#processor = Wav2Vec2Processor.from_pretrained("/data/p312702/from_wietse/wav2vec2_fy_common_voice_91")
+#processor = Wav2Vec2Processor.from_pretrained("/data/wav2vec2_fy_common_voice_91")
 
 
-#model = Wav2Vec2ForCTCDualFEConv.from_pretrained("/data/p312702/from_wietse/"+model_id).cuda()
-#model = Wav2Vec2ForCTC.from_pretrained("/data/p312702/from_wietse/"+model_id).cuda()
-model = Wav2Vec2ForCTCDualFEAdd.from_pretrained("/data/p312702/from_wietse/"+model_id).cuda() 
+#model = Wav2Vec2ForCTCDualFEConv.from_pretrained("/data/"+model_id).cuda()
+#model = Wav2Vec2ForCTC.from_pretrained("/data/"+model_id).cuda()
+model = Wav2Vec2ForCTCDualFEAdd.from_pretrained("/data/"+model_id).cuda() 
 
 
 
 #model.wav2vec2.feature_extractor = DualFEAdd(model.wav2vec2.feature_extractor)
 
-#model = model.from_pretrained("/data/p312702/from_wietse/"+model_id).cuda()
+#model = model.from_pretrained("/data/"+model_id).cuda()
 
 #model.to("cuda")
 
@@ -330,9 +330,9 @@ def compute_metrics(pred):
 
 language_ids=[]
 
-processor= Wav2Vec2Processor.from_pretrained("/data/p312702/from_wietse/"+model_id) #"Reihaneh/wav2vec2_frisian_common_voice_"+model_number)
+processor= Wav2Vec2Processor.from_pretrained("/data/"+model_id) #"Reihaneh/wav2vec2_frisian_common_voice_"+model_number)
 
-#processor= Wav2Vec2Processor.from_pretrained("/data/p312702/from_wietse/"+model_id) #"Reihaneh/wav2vec2_frisian_common_voice_"+model_number)
+#processor= Wav2Vec2Processor.from_pretrained("/data/"+model_id) #"Reihaneh/wav2vec2_frisian_common_voice_"+model_number)
  
 
 def map_to_result(batch):
@@ -369,7 +369,7 @@ def map_to_result(batch):
   print(batch["sentence"])
   return batch
 '''
-#processor = Wav2Vec2Processor.from_pretrained("/data/p312702/from_wietse/"+model_id) #"Reihaneh/wav2vec2_frisian_common_voice_"+model_number)
+#processor = Wav2Vec2Processor.from_pretrained("/data/"+model_id) #"Reihaneh/wav2vec2_frisian_common_voice_"+model_number)
 
 
 
