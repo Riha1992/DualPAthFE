@@ -1,2 +1,3 @@
-# DualPAthFE
+# DualPathFE
 Dual-Path Feature Extraction for Wav2Vec2 
+DualPathFE implements a dual-path feature extractor for fine-tuning wav2vec2-based models (XLS-R, specifically) by cloning the vanilla feature extractor and fine-tuning the clone while keeping the original FE frozen. Originally proposed to make the model robust against environmental noise (Shi, H., & Kawahara, T. (2024). Dual-path Adaptation of Pretrained Feature Extraction Module for Robust Automatic Speech Recognition. In Proc. Interspeech 2024), the architecture is intended to make more efficient use of the learned representations by balancing the trade-off between the fine-tuned feature extractor forgetting the pre-trained information while learning task-specific knowledge and the frozen feature extractor maintaining it. 
