@@ -131,7 +131,7 @@ print("length of vocab dict: ",len(vocab_dict))
 #target_lang = "fry"
 #new_vocab_dict = {target_lang: vocab_dict}
 import json
-with open('/data/p312702/from_wietse/'+model_name+model_number+'/vocab.json', 'w') as vocab_file:
+with open('/data/'+model_name+model_number+'/vocab.json', 'w') as vocab_file:
     json.dump(vocab_dict, vocab_file)
 
 
@@ -140,7 +140,7 @@ with open('/data/p312702/from_wietse/'+model_name+model_number+'/vocab.json', 'w
 
 from transformers import Wav2Vec2CTCTokenizer
 
-tokenizer = Wav2Vec2CTCTokenizer("/data/p312702/from_wietse/"+model_name+model_number+"/vocab.json", unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|") # target_lang=target_lang
+tokenizer = Wav2Vec2CTCTokenizer("/data/"+model_name+model_number+"/vocab.json", unk_token="[UNK]", pad_token="[PAD]", word_delimiter_token="|") # target_lang=target_lang
 repo_name = model_name+model_number
 tokenizer.push_to_hub(repo_name)
 
