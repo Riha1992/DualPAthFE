@@ -17,9 +17,9 @@ import evaluate
 
 
 
-base_url_train = "/data/p312702/from_wietse/train_fy_nl/"
-base_url_validation = "/data/p312702/from_wietse/validation_fy_nl/"
-#base_url_test = "/data/p312702/from_wietse/test_fy_nl/"
+base_url_train = "/data/train_fy_nl/"
+base_url_validation = "/data/validation_fy_nl/"
+#base_url_test = "/data/test_fy_nl/"
 
 
 cv_germanic_train = load_dataset("audiofolder",data_dir=base_url_train)
